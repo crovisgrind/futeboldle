@@ -22,8 +22,13 @@ const PLAYERS = [
 
 function comparePlayers(guess, target) {
   const result = [];
-  const guessUpper = guess.toUpperCase();
+  let guessUpper = guess.toUpperCase();
   const targetUpper = target.name;
+
+  // Remove espaço do final se existir
+  if (guessUpper.endsWith(' ')) {
+    guessUpper = guessUpper.trimEnd();
+  }
 
   for (let i = 0; i < guessUpper.length; i++) {
     if (i < targetUpper.length) {
@@ -79,8 +84,9 @@ export default function WordleJogadores() {
   const handleGuess = () => {
     if (!input.trim() || !targetPlayer) return;
 
-    const guessedPlayer = PLAYERS.find(p => p.name.toUpperCase() === input.toUpperCase());
-    const displayName = guessedPlayer ? guessedPlayer.name : input.toUpperCase();
+    const inputClean = input.trim().toUpperCase();
+    const guessedPlayer = PLAYERS.find(p => p.name.toUpperCase() === inputClean);
+    const displayName = guessedPlayer ? guessedPlayer.name : inputClean;
     const isCorrect = guessedPlayer && guessedPlayer.name === targetPlayer.name;
     const hint = isCorrect ? null : (guessedPlayer ? getHint(guessedPlayer, targetPlayer) : null);
 
