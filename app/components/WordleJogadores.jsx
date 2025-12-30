@@ -80,22 +80,18 @@ export default function WordleJogadores() {
     if (!input.trim() || !targetPlayer) return;
 
     const guessedPlayer = PLAYERS.find(p => p.name.toUpperCase() === input.toUpperCase());
-    
-    if (!guessedPlayer) {
-      alert('Jogador não encontrado!');
-      return;
-    }
-
-    const isCorrect = guessedPlayer.name === targetPlayer.name;
-    const hint = isCorrect ? null : getHint(guessedPlayer, targetPlayer);
+    const displayName = guessedPlayer ? guessedPlayer.name : input.toUpperCase();
+    const isCorrect = guessedPlayer && guessedPlayer.name === targetPlayer.name;
+    const hint = isCorrect ? null : (guessedPlayer ? getHint(guessedPlayer, targetPlayer) : null);
 
     const newGuess = {
-      name: guessedPlayer.name,
+      name: displayName,
       letterMatch: comparePlayers(input, targetPlayer),
-      teamMatch: guessedPlayer.teams.some(t => targetPlayer.teams.includes(t)) ? '✓' : '✗',
-      titleMatch: guessedPlayer.titles.some(t => targetPlayer.titles.includes(t)) ? '✓' : '✗',
+      teamMatch: guessedPlayer && guessedPlayer.teams.some(t => targetPlayer.teams.includes(t)) ? '✓' : '?',
+      titleMatch: guessedPlayer && guessedPlayer.titles.some(t => targetPlayer.titles.includes(t)) ? '✓' : '?',
       isCorrect: isCorrect,
       hint: hint,
+      isValidPlayer: !!guessedPlayer,
     };
 
     const updatedGuesses = [...guesses, newGuess];
@@ -128,8 +124,8 @@ export default function WordleJogadores() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-green-900 to-green-700 p-6 flex flex-col items-center justify-center">
       <div className="w-full max-w-2xl">
-        <h1 className="text-5xl font-bold text-white text-center mb-2">⚽ FUTEBOLDLE</h1>
-        <p className="text-center text-green-100 mb-8">Adivinhe o jogador brasileiro! Você tem 6 tentativas.</p>
+        <h1 className="text-5xl font-bold text-white text-center mb-2">⚽ CRAQUE DA BOLA</h1>
+        <p className="text-center text-green-100 mb-8">Adivinhe o jogador do Brasileirão! Você tem 6 tentativas.</p>
 
         <div className="bg-white rounded-lg shadow-2xl p-6 mb-6">
           <div className="space-y-4 mb-6 max-h-96 overflow-y-auto">
@@ -153,10 +149,10 @@ export default function WordleJogadores() {
                     ))}
                   </div>
                   <div className="grid grid-cols-2 gap-2 text-sm mb-3">
-                    <div className={`p-2 rounded font-semibold ${guess.teamMatch === '✓' ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'}`}>
+                    <div className={`p-2 rounded font-semibold ${guess.teamMatch === '✓' ? 'bg-green-100 text-green-800' : guess.teamMatch === '✗' ? 'bg-red-100 text-red-800' : 'bg-gray-100 text-gray-800'}`}>
                       Times: {guess.teamMatch}
                     </div>
-                    <div className={`p-2 rounded font-semibold ${guess.titleMatch === '✓' ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'}`}>
+                    <div className={`p-2 rounded font-semibold ${guess.titleMatch === '✓' ? 'bg-green-100 text-green-800' : guess.titleMatch === '✗' ? 'bg-red-100 text-red-800' : 'bg-gray-100 text-gray-800'}`}>
                       Títulos: {guess.titleMatch}
                     </div>
                   </div>
