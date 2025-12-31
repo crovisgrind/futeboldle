@@ -1,0 +1,315 @@
+[
+  {
+    "name": "PELÉ",
+    "revivedPor": "SANTOS",
+    "teams": [
+      "SANTOS",
+      "NEW YORK COSMOS",
+      "BRASIL"
+    ],
+    "titles": [
+      "COPA DO MUNDO 1962",
+      "LIBERTADORES 1962",
+      "LIBERTADORES 1963",
+      "LIBERTADORES 1965",
+      "PAULISTA 1957",
+      "PAULISTA 1958",
+      "PAULISTA 1960",
+      "COPA DO MUNDO 1958",
+      "COPA INTERCONTINENTAL 1962"
+    ],
+    "gols": 767
+  },
+  {
+    "name": "RONALDO",
+    "revivedPor": "CRUZEIRO",
+    "teams": [
+      "CRUZEIRO",
+      "PSV EINDHOVEN",
+      "BARCELONA",
+      "INTERNAZIONALE",
+      "REAL MADRID",
+      "MILAN",
+      "CORINTHIANS",
+      "BRASIL"
+    ],
+    "titles": [
+      "COPA DO MUNDO 1994",
+      "LIBERTADORES 2011",
+      "LIBERTADORES 1993",
+      "PAULISTA 2009",
+      "COPA DO MUNDO 2002",
+      "COPA INTERCONTINENTAL 2002"
+    ],
+    "gols": 1
+  },
+  {
+    "name": "RONALDINHO",
+    "revivedPor": "GRÊMIO",
+    "teams": [
+      "GRÊMIO",
+      "PARIS SAINT-GERMAIN",
+      "BARCELONA",
+      "MILAN",
+      "FLAMENGO",
+      "ATLÉTICO MINEIRO",
+      "QUERÉTARO",
+      "FLUMINENSE",
+      "BRASIL"
+    ],
+    "titles": [
+      "LIBERTADORES 2013",
+      "COPA DO MUNDO 2002"
+    ],
+    "gols": 68
+  },
+  {
+    "name": "NEYMAR",
+    "revivedPor": "SANTOS",
+    "teams": [
+      "SANTOS",
+      "BARCELONA",
+      "PARIS SAINT-GERMAIN",
+      "AL-HILAL",
+      "SANTOS",
+      "BRASIL"
+    ],
+    "titles": [
+      "LIBERTADORES 2011",
+      "LIBERTADORES 2012",
+      "PAULISTA 2012",
+      "PAULISTA 2009",
+      "PAULISTA 2010"
+    ],
+    "gols": 17
+  },
+  {
+    "name": "KAKÁ",
+    "revivedPor": "SÃO PAULO",
+    "teams": [
+      "SÃO PAULO",
+      "MILAN",
+      "REAL MADRID",
+      "MILAN",
+      "ORLANDO CITY",
+      "SÃO PAULO",
+      "BRASIL"
+    ],
+    "titles": [
+      "COPA DO MUNDO 2002"
+    ],
+    "gols": 26
+  },
+  {
+    "name": "RIVALDO",
+    "revivedPor": "APOSENTADO",
+    "teams": [
+      "SANTOS",
+      "BRASIL",
+      "SÃO PAULO",
+      "CORINTHIANS",
+      "PALMEIRAS",
+      "FLAMENGO",
+      "BOTAFOGO",
+      "CRUZEIRO",
+      "ATLÉTICO MINEIRO",
+      "PSV",
+      "BARCELONA",
+      "REAL MADRID",
+      "MILAN",
+      "LIVERPOOL"
+    ],
+    "titles": [
+      "PAULISTA 1996",
+      "PAULISTA 1994",
+      "COPA DO MUNDO 2002"
+    ],
+    "gols": 1
+  },
+  {
+    "name": "ROMÁRIO",
+    "revivedPor": "VASCO DA GAMA",
+    "teams": [
+      "VASCO DA GAMA",
+      "PSV EINDHOVEN",
+      "BARCELONA",
+      "FLAMENGO",
+      "VALENCIA",
+      "FLAMENGO",
+      "FLAMENGO",
+      "VASCO DA GAMA",
+      "FLUMINENSE",
+      "AL-SADD",
+      "FLUMINENSE",
+      "VASCO DA GAMA",
+      "MIAMI FC",
+      "ADELAIDE UNITED",
+      "VASCO DA GAMA",
+      "BRASIL"
+    ],
+    "titles": [
+      "COPA DO MUNDO 1994",
+      "CARIOCA 1987",
+      "CARIOCA 1985",
+      "CARIOCA 2008"
+    ],
+    "gols": 1000
+  },
+  {
+    "name": "ROBINHO",
+    "revivedPor": "SANTOS",
+    "teams": [
+      "SANTOS",
+      "BRASIL",
+      "SÃO PAULO",
+      "CORINTHIANS",
+      "PALMEIRAS",
+      "FLAMENGO",
+      "VASCO",
+      "BOTAFOGO",
+      "GRÊMIO",
+      "CRUZEIRO",
+      "ATLÉTICO MINEIRO",
+      "BAHIA",
+      "CORITIBA",
+      "REAL MADRID",
+      "MILAN"
+    ],
+    "titles": [
+      "PAULISTA 1984",
+      "PAULISTA 2015"
+    ],
+    "gols": 21
+  },
+  {
+    "name": "VINICIUS JR",
+    "revivedPor": "FLAMENGO",
+    "teams": [
+      "FLAMENGO",
+      "REAL MADRID CASTILLA",
+      "REAL MADRID",
+      "BRASIL"
+    ],
+    "titles": [
+      "LIBERTADORES 2018",
+      "COPA INTERCONTINENTAL 2024"
+    ],
+    "gols": 52
+  },
+  {
+    "name": "GARRINCHA",
+    "revivedPor": "BOTAFOGO",
+    "teams": [
+      "BOTAFOGO",
+      "CORINTHIANS",
+      "PORTUGUESA SANTISTA",
+      "FORTALEZA",
+      "JUNIOR DE BARRANQUILLA",
+      "FLAMENGO",
+      "NOVO HAMBURGO",
+      "RIOGRANDENSE",
+      "[1]",
+      "OLARIA",
+      "BRASIL"
+    ],
+    "titles": [
+      "COPA DO MUNDO 1962",
+      "COPA DO MUNDO 1958",
+      "CARIOCA 1961",
+      "CARIOCA 1962"
+    ],
+    "gols": 14
+  },
+  {
+    "name": "TOSTÃO",
+    "revivedPor": "SANTOS",
+    "teams": [
+      "SANTOS",
+      "BRASIL",
+      "SÃO PAULO",
+      "CORINTHIANS",
+      "PALMEIRAS",
+      "FLAMENGO",
+      "VASCO",
+      "BOTAFOGO",
+      "GRÊMIO",
+      "CRUZEIRO",
+      "ATLÉTICO MINEIRO",
+      "BAHIA",
+      "CORITIBA",
+      "REAL MADRID",
+      "LIVERPOOL"
+    ],
+    "titles": [
+      "COPA DO MUNDO 1970"
+    ],
+    "gols": 249
+  },
+  {
+    "name": "SÓCRATES",
+    "revivedPor": "SÃO PAULO",
+    "teams": [
+      "SÃO PAULO",
+      "COSMOS",
+      "BRASIL"
+    ],
+    "titles": [],
+    "gols": 0
+  },
+  {
+    "name": "DIDI",
+    "revivedPor": "BRASIL",
+    "teams": [
+      "BRASIL"
+    ],
+    "titles": [],
+    "gols": 0
+  },
+  {
+    "name": "ZIZINHO",
+    "revivedPor": "SANTOS",
+    "teams": [
+      "SANTOS",
+      "BRASIL",
+      "SÃO PAULO",
+      "CORINTHIANS",
+      "PALMEIRAS",
+      "FLAMENGO",
+      "VASCO"
+    ],
+    "titles": [
+      "PAULISTA 1957",
+      "CARIOCA 1952"
+    ],
+    "gols": 142
+  },
+  {
+    "name": "FRED",
+    "revivedPor": "FORTALEZASUB-18",
+    "teams": [
+      "SANTOS",
+      "BRASIL",
+      "SÃO PAULO",
+      "CORINTHIANS",
+      "PALMEIRAS",
+      "FLAMENGO",
+      "VASCO",
+      "BOTAFOGO",
+      "GRÊMIO",
+      "INTER",
+      "CRUZEIRO",
+      "ATLÉTICO MINEIRO",
+      "BAHIA",
+      "CORITIBA",
+      "BARCELONA"
+    ],
+    "titles": [
+      "LIBERTADORES 2008",
+      "LIBERTADORES 2013",
+      "CARIOCA 2010",
+      "CARIOCA 2016",
+      "CARIOCA 2012"
+    ],
+    "gols": 417
+  }
+]

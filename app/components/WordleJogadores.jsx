@@ -2,9 +2,14 @@
 
 import React, { useState, useEffect } from 'react';
 import { RotateCcw } from 'lucide-react';
+import playersData from '@/public/data/players.json';
 
-const PLAYERS = [
-  { name: 'PELÉ', revivedPor: 'SANTOS', teams: ['SANTOS', 'NYK', 'BRASIL'], titles: ['TRICAMPEÃO MUNDIAL 1958-1962-1970', 'LIBERTADORES 1962-1963', 'PAULISTA'], gols: 1283 },
+const fallbackPlayers = [
+  { name: 'PELÉ', revivedPor: 'SANTOS', teams: ['SANTOS', 'NYK', 'BRASIL'], titles: ['COPA DO MUNDO 1958', 'LIBERTADORES 1962'], gols: 767 },
+  { name: 'RONALDO', revivedPor: 'CRUZEIRO', teams: ['CRUZEIRO', 'PSV', 'INTER', 'REAL MADRID', 'BRASIL'], titles: ['COPA DO MUNDO 1994', 'LIBERTADORES 1992'], gols: 62 },
+  { name: 'RONALDINHO', revivedPor: 'GRÊMIO', teams: ['GRÊMIO', 'PSG', 'BARCELONA', 'BRASIL'], titles: ['COPA DO MUNDO 2002', 'LIBERTADORES 1995'], gols: 33 },
+  { name: 'NEYMAR', revivedPor: 'SANTOS', teams: ['SANTOS', 'BARCELONA', 'PSG', 'BRASIL'], titles: ['COPA AMÉRICA 2021', 'OURO OLÍMPICO 2016'], gols: 79 },
+];
   { name: 'RONALDO', revivedPor: 'CRUZEIRO', teams: ['CRUZEIRO', 'PSV', 'INTER', 'REAL MADRID', 'BRASIL'], titles: ['BICAMPEÃO MUNDIAL 1994-2002', 'LIBERTADORES 1992'], gols: 62 },
   { name: 'RONALDINHO', revivedPor: 'GRÊMIO', teams: ['GRÊMIO', 'PSG', 'BARCELONA', 'BRASIL'], titles: ['CAMPEÃO MUNDIAL 2002', 'LIBERTADORES 1995', 'CHAMPIONS LEAGUE 2006'], gols: 33 },
   { name: 'NEYMAR', revivedPor: 'SANTOS', teams: ['SANTOS', 'BARCELONA', 'PSG', 'BRASIL'], titles: ['COPA AMÉRICA 2021', 'OURO OLÍMPICO 2016'], gols: 79 },
