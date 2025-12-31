@@ -5,32 +5,19 @@ import { RotateCcw } from 'lucide-react';
 import playersData from '@/public/data/players.json';
 
 const fallbackPlayers = [
-  { name: 'PELÉ', revivedPor: 'SANTOS', teams: ['SANTOS', 'NYK', 'BRASIL'], titles: ['COPA DO MUNDO 1958', 'LIBERTADORES 1962'], gols: 767 },
-  { name: 'RONALDO', revivedPor: 'CRUZEIRO', teams: ['CRUZEIRO', 'PSV', 'INTER', 'REAL MADRID', 'BRASIL'], titles: ['COPA DO MUNDO 1994', 'LIBERTADORES 1992'], gols: 62 },
-  { name: 'RONALDINHO', revivedPor: 'GRÊMIO', teams: ['GRÊMIO', 'PSG', 'BARCELONA', 'BRASIL'], titles: ['COPA DO MUNDO 2002', 'LIBERTADORES 1995'], gols: 33 },
-  { name: 'NEYMAR', revivedPor: 'SANTOS', teams: ['SANTOS', 'BARCELONA', 'PSG', 'BRASIL'], titles: ['COPA AMÉRICA 2021', 'OURO OLÍMPICO 2016'], gols: 79 },
+  { name: 'PELÉ', revivedPor: 'SANTOS', teams: ['SANTOS', 'BRASIL'], titles: ['COPA DO MUNDO 1958'], gols: 767 },
+  { name: 'RONALDO', revivedPor: 'CRUZEIRO', teams: ['CRUZEIRO', 'BRASIL'], titles: ['COPA DO MUNDO 1994'], gols: 62 },
+  { name: 'RONALDINHO', revivedPor: 'GRÊMIO', teams: ['GRÊMIO', 'BRASIL'], titles: ['COPA DO MUNDO 2002'], gols: 33 },
+  { name: 'NEYMAR', revivedPor: 'SANTOS', teams: ['SANTOS', 'BRASIL'], titles: ['COPA AMÉRICA 2021'], gols: 79 },
 ];
-  { name: 'RONALDO', revivedPor: 'CRUZEIRO', teams: ['CRUZEIRO', 'PSV', 'INTER', 'REAL MADRID', 'BRASIL'], titles: ['BICAMPEÃO MUNDIAL 1994-2002', 'LIBERTADORES 1992'], gols: 62 },
-  { name: 'RONALDINHO', revivedPor: 'GRÊMIO', teams: ['GRÊMIO', 'PSG', 'BARCELONA', 'BRASIL'], titles: ['CAMPEÃO MUNDIAL 2002', 'LIBERTADORES 1995', 'CHAMPIONS LEAGUE 2006'], gols: 33 },
-  { name: 'NEYMAR', revivedPor: 'SANTOS', teams: ['SANTOS', 'BARCELONA', 'PSG', 'BRASIL'], titles: ['COPA AMÉRICA 2021', 'OURO OLÍMPICO 2016'], gols: 79 },
-  { name: 'VINICIUS JR', revivedPor: 'FLAMENGO', teams: ['FLAMENGO', 'REAL MADRID', 'BRASIL'], titles: ['LIBERTADORES 2019', 'CHAMPIONS LEAGUE 2022'], gols: 35 },
-  { name: 'KAKÁ', revivedPor: 'SÃO PAULO', teams: ['SÃO PAULO', 'MILAN', 'REAL MADRID', 'BRASIL'], titles: ['CAMPEÃO MUNDIAL 2002', 'LIBERTADORES 1992', 'CHAMPIONS LEAGUE 2007'], gols: 86 },
-  { name: 'RIVALDO', revivedPor: 'PALMEIRAS', teams: ['PALMEIRAS', 'BARCELONA', 'BRASIL'], titles: ['CAMPEÃO MUNDIAL 2002', 'LIBERTADORES 1999'], gols: 35 },
-  { name: 'ROBINHO', revivedPor: 'SANTOS', teams: ['SANTOS', 'REAL MADRID', 'MILAN', 'BRASIL'], titles: ['LIBERTADORES 2011', 'PAULISTA'], gols: 28 },
-  { name: 'DIDI', revivedPor: 'BOTAFOGO', teams: ['BOTAFOGO', 'REAL MADRID', 'BRASIL'], titles: ['TRICAMPEÃO MUNDIAL 1958-1962-1970'], gols: 31 },
-  { name: 'GARRINCHA', revivedPor: 'BOTAFOGO', teams: ['BOTAFOGO', 'BRASIL'], titles: ['BICAMPEÃO MUNDIAL 1958-1962', 'LIBERTADORES 1948'], gols: 49 },
-  { name: 'TOSTÃO', revivedPor: 'CRUZEIRO', teams: ['CRUZEIRO', 'BRASIL'], titles: ['CAMPEÃO MUNDIAL 1970', 'LIBERTADORES 1976'], gols: 33 },
-  { name: 'SÓCRATES', revivedPor: 'CORINTHIANS', teams: ['CORINTHIANS', 'BRASIL'], titles: ['COPA AMÉRICA 1983', 'PAULISTA'], gols: 35 },
-  { name: 'ZIZINHO', revivedPor: 'FLAMENGO', teams: ['FLAMENGO', 'BRASIL'], titles: ['LIBERTADORES 1948-1951', 'COPA AMÉRICA 1949'], gols: 44 },
-  { name: 'FRED', revivedPor: 'ATLÉTICO MINEIRO', teams: ['ATLÉTICO MINEIRO', 'LYONNAISE', 'BRASIL'], titles: ['LIBERTADORES 2013', 'COPA AMÉRICA 1999'], gols: 42 },
-];
+
+const PLAYERS = Array.isArray(playersData) && playersData.length > 0 ? playersData : fallbackPlayers;
 
 function comparePlayers(guess, target) {
   const result = [];
   let guessUpper = guess.toUpperCase();
   const targetUpper = target.name;
 
-  // Remove espaço do final se existir
   if (guessUpper.endsWith(' ')) {
     guessUpper = guessUpper.trimEnd();
   }
@@ -52,19 +39,16 @@ function comparePlayers(guess, target) {
 function getHint(guessedPlayer, targetPlayer) {
   const hints = [];
 
-  // Dica de time que revelou
   if (guessedPlayer.revivedPor !== targetPlayer.revivedPor) {
     hints.push(`💡 Time que revelou: ${targetPlayer.revivedPor}`);
   }
 
-  // Dica de um dos times que jogou
   const commonTeams = guessedPlayer.teams.filter(t => targetPlayer.teams.includes(t));
   if (commonTeams.length === 0 && guessedPlayer.teams.length > 0) {
     const targetTeam = targetPlayer.teams[Math.floor(Math.random() * targetPlayer.teams.length)];
     hints.push(`⚽ Time que jogou: ${targetTeam}`);
   }
 
-  // Dica de um dos títulos
   const commonTitles = guessedPlayer.titles.filter(t => targetPlayer.titles.includes(t));
   if (commonTitles.length === 0 && guessedPlayer.titles.length > 0) {
     const targetTitle = targetPlayer.titles[Math.floor(Math.random() * targetPlayer.titles.length)];
@@ -220,8 +204,8 @@ export default function WordleJogadores() {
         </div>
 
         <div className="bg-white bg-opacity-10 rounded-lg p-4 text-white text-sm">
-          <p className="font-bold mb-2">📋 Jogadores disponíveis ({PLAYERS.length}):</p>
-          <p className="text-xs">{PLAYERS.map(p => p.name).join(', ')}</p>
+          <p className="font-bold mb-2">📋 Jogadores carregados:</p>
+          <p className="text-xs">{PLAYERS.length} jogadores</p>
         </div>
       </div>
     </div>
