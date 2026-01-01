@@ -105,25 +105,32 @@ export default function CraqueDoDia() {
   };
 
   const shareResults = (isFinal = false) => {
-    const shareUrl = 'https://craquedodia.com.br';
-    let text = "";
+  const shareUrl = 'https://craquedodia.com.br';
+  let text = "";
 
-    if (isFinal) {
-      text = `Completei o Craque do Dia! ⚽🏆\nStreak atual: ${stats.streak} 🔥\nDesafios vencidos hoje: ${stats.dailyCount}/${DAILY_LIMIT}\n\nJogue também: ${shareUrl}`;
-    } else {
-      const squares = guesses.map(g => 
-        g.results.map(r => r === 'correct' ? '🟩' : r === 'present' ? '🟨' : '⬛').join('')
-      ).join('\n');
-      text = `Adivinhei o Craque do Dia! ⚽\n\n${squares}\n\nDesafio ${stats.dailyCount}/${DAILY_LIMIT}\n${shareUrl}`;
-    }
-    
-    if (navigator.share) {
-      navigator.share({ title: 'Craque do Dia', text }).catch(() => {});
-    } else {
-      navigator.clipboard.writeText(text);
-      alert('Resultado copiado!');
-    }
-  };
+  // DISPARAR EVENTO PARA O GOOGLE ANALYTICS
+  sendGAEvent({
+    event: 'share_results',
+    value: isFinal ? 'final_placar' : `desafio_${stats.dailyCount}`,
+    player_name: targetPlayer?.name || 'resumo_geral'
+  });
+
+  if (isFinal) {
+    text = `Completei o Craque do Dia! ⚽🏆\nStreak atual: ${stats.streak} 🔥\nDesafios vencidos hoje: ${stats.dailyCount}/${DAILY_LIMIT}\n\nJogue também: ${shareUrl}`;
+  } else {
+    const squares = guesses.map(g => 
+      g.results.map(r => r === 'correct' ? '🟩' : r === 'present' ? '🟨' : '⬛').join('')
+    ).join('\n');
+    text = `Adivinhei o Craque do Dia! ⚽\n\n${squares}\n\nDesafio ${stats.dailyCount}/${DAILY_LIMIT}\n${shareUrl}`;
+  }
+  
+  if (navigator.share) {
+    navigator.share({ title: 'Craque do Dia', text }).catch(() => {});
+  } else {
+    navigator.clipboard.writeText(text);
+    alert('Resultado copiado!');
+  }
+};
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-green-900 via-green-800 to-green-700 flex flex-col items-center p-4 font-sans text-white">
