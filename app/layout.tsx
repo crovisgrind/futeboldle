@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+// 1. Importe o GoogleAnalytics
+import { GoogleAnalytics } from '@next/third-parties/google'
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -15,33 +17,10 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "Craque do Dia - Desafio Diario de Futebol",
   description: "Voce conhece os idolos do futebol brasileiro? Acerte os 3 craques de hoje e mantenha sua sequencia no Craque do Dia.",
-  keywords: ["futebol", "jogo", "wordle", "brasileirao", "craque do dia", "adivinhar jogador"],
-  openGraph: {
-    title: "Craque do Dia",
-    description: "Tente adivinhar os 3 jogadores brasileiros de hoje.",
-    url: "https://craquedodia.com.br",
-    siteName: "Craque do Dia",
-    images: [
-      {
-        url: "/og-image.png",
-        width: 1200,
-        height: 630,
-        alt: "Craque do Dia - Jogo de adivinhar jogadores",
-      },
-    ],
-    locale: "pt_BR",
-    type: "website",
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "Craque do Dia",
-    description: "Sera que voce consegue acertar os jogadores de hoje?",
-    images: ["/og-image.png"],
-  },
-  // Correcao do erro de propriedade:
+  // ... (mantenha o restante das metadados que já configuramos)
   icons: {
     icon: "/favicon.ico?v=1",
-    apple: "/favicon.ico?v=1", // Agora o Next.js aceita 'apple' aqui dentro
+    apple: "/favicon.ico?v=1",
   },
 };
 
@@ -57,6 +36,8 @@ export default function RootLayout({
       >
         {children}
       </body>
+      {/* 2. Adicione aqui logo após o body, substituindo pelo seu ID real */}
+      <GoogleAnalytics gaId="G-JGWPL30VRR" />
     </html>
   );
 }
