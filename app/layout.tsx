@@ -13,18 +13,17 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Craque do Dia ⚽ - Desafio Diário de Futebol",
-  description: "Você conhece os ídolos do futebol brasileiro? Acerte os 3 craques de hoje e mantenha seu streak no Craque do Dia!",
-  keywords: ["futebol", "jogo", "wordle", "brasileirão", "craque do dia", "adivinhar jogador"],
-  authors: [{ name: "Craque do Dia" }],
+  title: "Craque do Dia - Desafio Diario de Futebol",
+  description: "Voce conhece os idolos do futebol brasileiro? Acerte os 3 craques de hoje e mantenha sua sequencia no Craque do Dia.",
+  keywords: ["futebol", "jogo", "wordle", "brasileirao", "craque do dia", "adivinhar jogador"],
   openGraph: {
-    title: "Craque do Dia ⚽",
-    description: "Tente adivinhar os 3 jogadores brasileiros de hoje!",
+    title: "Craque do Dia",
+    description: "Tente adivinhar os 3 jogadores brasileiros de hoje.",
     url: "https://craquedodia.com.br",
     siteName: "Craque do Dia",
     images: [
       {
-        url: "/og-image.png", // Certifique-se de salvar a imagem na pasta /public com este nome
+        url: "/og-image.png",
         width: 1200,
         height: 630,
         alt: "Craque do Dia - Jogo de adivinhar jogadores",
@@ -35,16 +34,14 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Craque do Dia ⚽",
-    description: "Será que você consegue acertar os jogadores de hoje?",
+    title: "Craque do Dia",
+    description: "Sera que voce consegue acertar os jogadores de hoje?",
     images: ["/og-image.png"],
   },
-  icons:[
-      { url: '/favicon.ico?v=1' }, // O ?v=1 força o navegador a limpar o cache
-    ],
-    apple: [
-      { url: '/favicon.ico?v=1' },
-    ],
+  // Correcao do erro de propriedade:
+  icons: {
+    icon: "/favicon.ico?v=1",
+    apple: "/favicon.ico?v=1", // Agora o Next.js aceita 'apple' aqui dentro
   },
 };
 
