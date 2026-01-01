@@ -39,8 +39,12 @@ export const metadata: Metadata = {
     description: "Será que você consegue acertar os jogadores de hoje?",
     images: ["/og-image.png"],
   },
-  icons: {
-    icon: "/favicon.ico", // Coloque um ícone de bola ou um "C" na pasta public
+  icons:[
+      { url: '/favicon.ico?v=1' }, // O ?v=1 força o navegador a limpar o cache
+    ],
+    apple: [
+      { url: '/favicon.ico?v=1' },
+    ],
   },
 };
 
