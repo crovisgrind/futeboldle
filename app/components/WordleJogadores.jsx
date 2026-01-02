@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import { RotateCcw, Lightbulb, Share2, Trophy, Lock, CheckCircle2, Shield } from 'lucide-react';
 import { sendGAEvent } from '@next/third-parties/google';
-import playersData from '@/data/players.json';
+import playersData from '../../data/players.json';
 
 const PLAYERS = Array.isArray(playersData) && playersData.length > 0 ? playersData : [];
 const DAILY_LIMIT = 3;
