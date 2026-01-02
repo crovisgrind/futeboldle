@@ -10,10 +10,17 @@ const DAILY_LIMIT = 3;
 
 const getDailyPlayerIndex = (challengeNumber) => {
   const today = new Date();
-  const dateSeed = today.getFullYear() * 10000 + (today.getMonth() + 1) * 100 + today.getDate();
-  const finalSeed = dateSeed + challengeNumber;
-  const x = Math.sin(finalSeed) * 10000;
-  return Math.floor((x - Math.floor(x)) * PLAYERS.length);
+  // Criamos uma chave única para o dia e o número do desafio
+  const seedString = `craque-${today.getFullYear()}-${today.getMonth() + 1}-${today.getDate()}-${challengeNumber}`;
+  
+  // Algoritmo de Hashing DJB2 (mais estável que Math.sin)
+  let hash = 5381;
+  for (let i = 0; i < seedString.length; i++) {
+    hash = (hash * 33) ^ seedString.charCodeAt(i);
+  }
+  
+  // Garante que o índice esteja dentro do tamanho da sua lista de jogadores
+  return Math.abs(hash) % PLAYERS.length;
 };
 
 export default function CraqueDoDia() {
