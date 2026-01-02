@@ -27,8 +27,8 @@ export async function GET() {
       // Pegamos apenas os 2 primeiros times e 2 primeiros títulos para a dica não ficar gigante
       timesExemplo: player.times.slice(0, 2).join(', '),
       titulosExemplo: player.titles.slice(0, 2).join(', '),
-      totalGols: player.gols,
-      url: "https://seusite.com.br" // Substitua pela sua URL
+      
+      url: "https://craquedodia.com.br" // Substitua pela sua URL
     };
 
     return NextResponse.json(hintData);
