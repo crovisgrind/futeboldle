@@ -1,13 +1,13 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import { RotateCcw, Lightbulb, Share2, Trophy, Lock, CheckCircle2 } from 'lucide-react';
+import { RotateCcw, Lightbulb, Share2, Trophy, Lock, CheckCircle2, Shield } from 'lucide-react';
+import { sendGAEvent } from '@next/third-parties/google';
 import playersData from '@/public/data/players.json';
 
 const PLAYERS = Array.isArray(playersData) && playersData.length > 0 ? playersData : [];
 const DAILY_LIMIT = 3;
 
-// Função para gerar o mesmo jogador para todos baseado na data
 const getDailyPlayerIndex = (challengeNumber) => {
   const today = new Date();
   const dateSeed = today.getFullYear() * 10000 + (today.getMonth() + 1) * 100 + today.getDate();
@@ -19,13 +19,13 @@ const getDailyPlayerIndex = (challengeNumber) => {
 export default function CraqueDoDia() {
   const [targetPlayer, setTargetPlayer] = useState(null);
   const [randomTitle, setRandomTitle] = useState('');
+  const [randomTeam, setRandomTeam] = useState(''); // Novo estado para o time
   const [guesses, setGuesses] = useState([]);
   const [input, setInput] = useState('');
   const [gameOver, setGameOver] = useState(false);
   const [won, setWon] = useState(false);
   const [stats, setStats] = useState({ dailyCount: 0, streak: 0, lastDate: '' });
 
-  // 1. Inicialização e Controle de Data
   useEffect(() => {
     const today = new Date().toLocaleDateString('pt-BR');
     const savedStats = JSON.parse(localStorage.getItem('craquedodia_stats')) || {
@@ -57,8 +57,14 @@ export default function CraqueDoDia() {
       const player = PLAYERS[index];
       setTargetPlayer(player);
       
+      // Sorteia um Título
       if (player?.titles?.length > 0) {
         setRandomTitle(player.titles[Math.floor(Math.random() * player.titles.length)]);
+      }
+
+      // Sorteia um Time (Sua nova dica!)
+      if (player?.times?.length > 0) {
+        setRandomTeam(player.times[Math.floor(Math.random() * player.times.length)]);
       }
 
       setGuesses([]);
@@ -66,7 +72,7 @@ export default function CraqueDoDia() {
       setGameOver(false);
       setWon(false);
     } else {
-      setTargetPlayer(null); // Ativa tela de limite atingido
+      setTargetPlayer(null);
     }
   };
 
@@ -105,32 +111,31 @@ export default function CraqueDoDia() {
   };
 
   const shareResults = (isFinal = false) => {
-  const shareUrl = 'https://craquedodia.com.br';
-  let text = "";
+    sendGAEvent({
+      event: 'share_results',
+      value: isFinal ? 'final_placar' : `desafio_${stats.dailyCount}`,
+      player_name: targetPlayer?.name || 'resumo_geral'
+    });
 
-  // DISPARAR EVENTO PARA O GOOGLE ANALYTICS
-  sendGAEvent({
-    event: 'share_results',
-    value: isFinal ? 'final_placar' : `desafio_${stats.dailyCount}`,
-    player_name: targetPlayer?.name || 'resumo_geral'
-  });
+    const shareUrl = 'https://craquedodia.com.br';
+    let text = "";
 
-  if (isFinal) {
-    text = `Completei o Craque do Dia! ⚽🏆\nStreak atual: ${stats.streak} 🔥\nDesafios vencidos hoje: ${stats.dailyCount}/${DAILY_LIMIT}\n\nJogue também: ${shareUrl}`;
-  } else {
-    const squares = guesses.map(g => 
-      g.results.map(r => r === 'correct' ? '🟩' : r === 'present' ? '🟨' : '⬛').join('')
-    ).join('\n');
-    text = `Adivinhei o Craque do Dia! ⚽\n\n${squares}\n\nDesafio ${stats.dailyCount}/${DAILY_LIMIT}\n${shareUrl}`;
-  }
-  
-  if (navigator.share) {
-    navigator.share({ title: 'Craque do Dia', text }).catch(() => {});
-  } else {
-    navigator.clipboard.writeText(text);
-    alert('Resultado copiado!');
-  }
-};
+    if (isFinal) {
+      text = `Completei o Craque do Dia! ⚽🏆\nStreak atual: ${stats.streak} 🔥\nDesafios vencidos hoje: ${stats.dailyCount}/${DAILY_LIMIT}\n\nJogue também: ${shareUrl}`;
+    } else {
+      const squares = guesses.map(g => 
+        g.results.map(r => r === 'correct' ? '🟩' : r === 'present' ? '🟨' : '⬛').join('')
+      ).join('\n');
+      text = `Adivinhei o Craque do Dia! ⚽\n\n${squares}\n\nDesafio ${stats.dailyCount}/${DAILY_LIMIT}\n${shareUrl}`;
+    }
+    
+    if (navigator.share) {
+      navigator.share({ title: 'Craque do Dia', text }).catch(() => {});
+    } else {
+      navigator.clipboard.writeText(text);
+      alert('Resultado copiado!');
+    }
+  };
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-green-900 via-green-800 to-green-700 flex flex-col items-center p-4 font-sans text-white">
@@ -157,7 +162,6 @@ export default function CraqueDoDia() {
         </p>
       </header>
 
-      {/* TELA DE LIMITE ATINGIDO (Sem Jogador Ativo) */}
       {!targetPlayer && stats.dailyCount >= DAILY_LIMIT ? (
         <div className="w-full max-w-sm bg-white p-8 rounded-3xl text-center shadow-2xl border-b-[10px] border-yellow-500 animate-in zoom-in text-slate-800">
           <div className="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
@@ -165,7 +169,7 @@ export default function CraqueDoDia() {
           </div>
           <h2 className="text-2xl font-black mb-2 uppercase italic">Sessão Finalizada!</h2>
           <p className="text-slate-500 font-medium text-sm mb-6">
-            Você já jogou os {DAILY_LIMIT} craques de hoje. Volte amanhã para manter sua sequência!
+            Você já jogou os {DAILY_LIMIT} craques de hoje. Volte amanhã!
           </p>
           <button onClick={() => shareResults(true)} className="w-full bg-blue-600 hover:bg-blue-700 text-white py-4 rounded-2xl font-bold flex items-center justify-center gap-2 transition-all shadow-lg active:scale-95">
             <Share2 size={20} /> Compartilhar Placar
@@ -197,23 +201,35 @@ export default function CraqueDoDia() {
             )}
           </div>
 
-          {/* DICAS */}
+          {/* DICAS PROGRESSIVAS */}
           <div className="w-full max-w-sm flex flex-col gap-2 mb-8 px-2">
-            {guesses.length >= 2 && (
-              <div className="bg-yellow-500 text-green-950 p-3 rounded-xl font-bold text-[10px] uppercase flex items-center gap-3 shadow-lg animate-in fade-in slide-in-from-left-4">
+            
+            {/* DICA 1: Sempre visível ou após o 1º erro - Decidi colocar após o 1º palpite para dar um desafio inicial */}
+            {guesses.length >= 0 && (
+              <div className="bg-green-600 text-white p-3 rounded-xl font-bold text-[10px] uppercase flex items-center gap-3 shadow-lg animate-in fade-in slide-in-from-left-4 border border-green-400/30">
+                <div className="bg-white/20 p-1.5 rounded-lg"><Shield size={16} /></div>
+                <span>Jogou no: {randomTeam}</span>
+              </div>
+            )}
+
+            {/* DICA 2: Revelação (RevivedPor) */}
+            {guesses.length >= 3 && (
+              <div className="bg-yellow-500 text-green-950 p-3 rounded-xl font-bold text-[10px] uppercase flex items-center gap-3 shadow-lg animate-in fade-in slide-in-from-right-4">
                 <div className="bg-green-950/10 p-1.5 rounded-lg"><Lightbulb size={16} /></div>
                 <span>Revelado por: {targetPlayer.revivedPor}</span>
               </div>
             )}
-            {guesses.length >= 4 && (
-              <div className="bg-white text-green-900 p-3 rounded-xl font-bold text-[10px] uppercase flex items-center gap-3 shadow-lg animate-in fade-in slide-in-from-right-4">
+
+            {/* DICA 3: Título */}
+            {guesses.length >= 5 && (
+              <div className="bg-white text-green-900 p-3 rounded-xl font-bold text-[10px] uppercase flex items-center gap-3 shadow-lg animate-in fade-in slide-in-from-left-4">
                 <div className="bg-green-900/10 p-1.5 rounded-lg"><Lightbulb size={16} /></div>
                 <span>Conquista: {randomTitle}</span>
               </div>
             )}
           </div>
 
-          {/* INPUT OU RESULTADO */}
+          {/* CONTROLES */}
           <div className="w-full max-w-sm px-2">
             {!gameOver ? (
               <div className="space-y-4">
@@ -225,7 +241,6 @@ export default function CraqueDoDia() {
                   onKeyDown={(e) => e.key === 'Enter' && handleGuess()}
                   className="w-full bg-black/40 border-2 border-green-500/50 p-5 rounded-2xl text-center text-3xl font-black tracking-[0.3em] focus:outline-none focus:border-yellow-400 transition-all placeholder:opacity-30"
                   placeholder="PALPITE"
-                  autoFocus
                 />
                 <button onClick={handleGuess} className="w-full bg-yellow-500 hover:bg-yellow-400 text-green-950 font-black py-5 rounded-2xl shadow-[0_6px_0_rgb(161,98,7)] active:translate-y-1 active:shadow-none transition-all uppercase tracking-widest text-lg">
                   Confirmar
